@@ -6,8 +6,16 @@
 ##########################################################################################
 
 
+# prepare for merging: change country codes
+figaro$Country[figaro$Country=="GR"] <- "EL"
+figaro$Country[figaro$Country=="GB"] <- "UK"
+
+
 # join data frames
 data  <- left_join(figaro, energy_perc)
+data  <- left_join(data,   ngas)
+data  <- left_join(data,   population)
+data  <- left_join(data,   gdppc)
 
 
 # replace NaNs with NAs
@@ -16,6 +24,10 @@ data[sapply(data, is.nan)] <- NA
 
 # remove NAs
 data <- data[complete.cases(data), ]
+
+
+# add gas consumption per capita
+data$Gas_FC_pC <- data$Gas_FC / data$Population
 
 
 # change names
@@ -51,7 +63,7 @@ data$Pumped_Hydro <- data$Geothermal <- data$Tide <- data$Heat_Pumps <- data$Pea
 # export data ############################################################################
 
 # bring in order first
-data <- data[,c(32,34,1:31,35:44)]
+data <- data[,c(35,37,1:34,38:52)]
 
 
 # in csv format

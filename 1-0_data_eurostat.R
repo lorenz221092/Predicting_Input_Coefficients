@@ -132,6 +132,61 @@ for (i in 3:ncol(energy_mix)) {
 }
 
 
+# get the totals in gwh
+energy_perc$Sector_Size <- rowSums(energy_mix[,3:19])
+
+
+
+
+
+
+# control variables ######################################################################
+
+
+
+# download population data from eurostat #################################################
+population <- get_eurostat(id = "demo_pjan")
+
+# subset and select variables
+population <- population %>% filter(age == "TOTAL", sex == "T") %>% select(geo, time, 
+                                                                           values)
+
+# rename variables
+names(population) <- c("Country", "Year", "Population")
+
+# transform year variable
+population$Year <- as.numeric(as.character(substr(population$Year,1,4)))
+
+
+
+
+# download natural gas consumption data from eurostat ####################################
+ngas <- get_eurostat(id = "nrg_cb_gas")
+
+# subset and select variables
+ngas <- ngas %>% filter(nrg_bal == "FC_E", siec == "G3000") %>% select(geo, time, values)
+
+# rename variables
+names(ngas) <- c("Country", "Year", "Gas_FC")
+
+# transform year variable
+ngas$Year <- as.numeric(as.character(substr(ngas$Year,1,4)))
+
+
+
+
+# download gdp per capita data from eurostat #############################################
+gdppc <- get_eurostat(id = "nama_10_pc")
+
+# subset and select variables
+gdppc <- gdppc %>% filter(na_item == "B1GQ", unit == "CP_PPS_EU27_2020_HAB") %>% 
+  select(geo, time, values)
+
+# rename variables
+names(gdppc) <- c("Country", "Year", "GDP_pC")
+
+# transform year variable
+gdppc$Year <- as.numeric(as.character(substr(gdppc$Year,1,4)))
 
 
 

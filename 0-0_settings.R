@@ -5,7 +5,9 @@
 ##########################################################################################
 ##########################################################################################
 
-require(tidyverse)
+require(dplyr)
+require(magrittr)
+require(tidyr)
 require(readxl)
 require(foreign)
 require(fastDummies)
