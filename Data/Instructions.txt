@@ -1,1 +1,1 @@
-Download Figaro data from https://ec.europa.eu/eurostat/documents/51957/12789261/IOI.7z/f0b3a84b-609a-b2dd-47a1-5e4eeda7d367?t=1621924019199 and place it here.
+Download Figaro data from https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/data/database (CSV matrix format (FIGARO 2022 edition)) and add all tables in the /Data folder. 
